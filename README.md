@@ -6,7 +6,7 @@ Now, the page will be loaded.
 Once the page is loaded, we can change the page number to see the available repositories.
 Repeat the same process for checking the different user name.
 
-
+ADDED TEST CASES;
 
 # Fyle Frontend Challenge
 
