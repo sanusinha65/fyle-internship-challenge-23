@@ -1,0 +1,80 @@
+<div
+  class="container mx-auto px-4 sm:px-6 lg:px-8 mb-5"
+  *ngIf="!isLoading && !error">
+  <div class="mt-5" *ngIf="repositories.length>0">
+    <h1 class="text-3xl text-gray-800 font-medium">Repositories</h1>
+    <hr class="mt-2 mb-5" />
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+    >
+      <div class="mt-2 mb-2" *ngFor="let repo of repositories">
+        <div
+          class="flex flex-col max-w-sm h-full shadow-2xl border border-indigo-500 rounded-3xl overflow-hidden shadow-lg hover:bg-gray-100"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl text-indigo-900 mb-2">
+              {{ repo.name }}
+            </div>
+            <p class="text-gray-700 text-base text-gray-400">
+              {{ repo.description }}
+            </p>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-red-300 rounded-full px-3 py-1 text-sm font-semibold text-red-700 mr-2 mb-2"
+              *ngFor="let topic of repo.topics"
+            >
+              {{ topic }}
+            </span>
+          </div>
+          <div class="px-6 py-3 mt-auto">
+            <hr />
+            <div class="flex">
+              <div class="w-1/2">
+                <p class="text-gray-700 text-base">
+                  {{ repo.language == null ? "No Language" : repo.language }}
+                </p>
+              </div>
+              <div class="w-1/2">
+                <p class="text-gray-700 text-base">{{ repo.default_branch }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center mt-5 flex-wrap" *ngIf="repositories.length>0">
+      <button
+        class="mx-2 my-1 bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+        (click)="previousPage()"
+        [class.bg-gray-400]="currentPage <= 9"
+        [disabled]="currentPage <= 9"
+      >
+        Back
+      </button>
+      <ng-container *ngFor="let page of totalPagesArray">
+        <button
+          class="mx-2 my-1 bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+          [class.bg-red-700]="currentPage === page"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </button>
+      </ng-container>
+      <button
+        class="mx-2 my-1 bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 mb-5" *ngIf="isLoading">
+    
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8" *ngIf="error">
+    <p class="text-gray-700">{{ error }}</p>
+</div>

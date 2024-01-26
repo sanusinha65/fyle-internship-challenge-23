@@ -1,3 +1,13 @@
+# Install The App and Dependencies
+
+First of all, give the Username
+After it, click on Submit.
+Now, the page will be loaded. 
+Once the page is loaded, we can change the page number to see the available repositories.
+Repeat the same process for checking the different user name.
+
+
+
 # Fyle Frontend Challenge
 
 ## Who is this for?
