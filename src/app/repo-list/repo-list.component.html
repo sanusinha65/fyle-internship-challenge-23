@@ -13,7 +13,7 @@
         >
           <div class="px-6 py-4">
             <div class="font-bold text-xl text-indigo-900 mb-2">
-              {{ repo.name }}
+              <a href={{repo.svn_url}} target="blank" class="hover:text-red-500">{{ repo.name }}</a>
             </div>
             <p class="text-gray-700 text-base text-gray-400">
               {{ repo.description }}

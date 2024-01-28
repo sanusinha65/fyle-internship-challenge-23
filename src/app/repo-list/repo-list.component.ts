@@ -46,6 +46,7 @@ export class RepoListComponent implements OnChanges {
       .subscribe(
         response => {
           this.repositories = response;
+          console.log(this.repositories);
           this.setTotalPages(this.publicRepoCount);
         }
       );
