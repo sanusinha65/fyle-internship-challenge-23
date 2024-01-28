@@ -20,11 +20,12 @@ export class ApiService {
   constructor(
     private httpClient: HttpClient
   ) { }
-
+// getting users page
   getUser(githubUsername: string): Observable<GitHubUser> {
     const url = `https://api.github.com/users/${githubUsername}`;
     return this.httpClient.get<GitHubUser>(url);
   }
+  // getting the repositories
   getRepositories(githubUsername: string, pageNumber: number = 1, perPage: number = 10): Observable<GitHubRepository[]> {
     const url = `https://api.github.com/users/${githubUsername}/repos?page=${pageNumber}&per_page=${perPage}`;
     return this.httpClient.get<GitHubRepository[]>(url);

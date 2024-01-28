@@ -18,19 +18,19 @@ export class UserDetailsComponent implements OnChanges {
   repos: any;
   error: string | null = null;
   constructor(private apiService: ApiService) {}
-
+// fetching the user data from the user input
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['userInput'] && this.userInput) {
       this.isLoading=true;
       this.fetchUserDetails(this.userInput);
     }
   }
-
+// for fetching the details 
   private fetchUserDetails(username: string): void {
-    this.userData = null;
-    this.repos = null;
-    this.error = null;
-    this.apiService.getUser(username)
+    this.userData = null; //clearing the previous details 
+    this.repos = null; // clearing the repos
+    this.error = null; //clearing the errors
+    this.apiService.getUser(username) 
       .pipe(
         catchError(error => {
           this.error = 'Error fetching user details: ' + error.message;
@@ -39,8 +39,8 @@ export class UserDetailsComponent implements OnChanges {
         finalize(() => this.isLoading = false) 
       )
       .subscribe(userData => {
-        this.userData = userData;
-        this.publicRepoCount.emit(userData.public_repos);
+        this.userData = userData;  // getting the user data 
+        this.publicRepoCount.emit(userData.public_repos); // passing the total repo count to calculate the page num
       });
   } 
 }
