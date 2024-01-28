@@ -12,6 +12,7 @@ export class RepoListComponent implements OnChanges {
   @Input() userInput: string = ''; // taking user input
   @Input() publicRepoCount: number = 0; // taking total number of repositories
   @Input() currentPage: number = 1; // Initialize currentPage here
+  perPage: number = 10;
   isLoading: boolean = false; // taking loading state for showing the loader
   repositories: any[] = []; // getting repositories
   topics: string[] = []; // getting topics
@@ -34,7 +35,7 @@ export class RepoListComponent implements OnChanges {
     this.isLoading = true;
     this.error = null; // Clear previous error
 
-    this.apiService.getRepositories(this.userInput, this.currentPage)
+    this.apiService.getRepositories(this.userInput, this.currentPage, this.perPage)
       .pipe(
         catchError(error => {
           this.error = 'Failed to load repositories. Please try again.';
@@ -53,7 +54,7 @@ export class RepoListComponent implements OnChanges {
   }
  // updating total page numbers
   setTotalPages(publicRepoCount: number): void {
-    this.totalPages = Math.ceil(publicRepoCount / 10);
+    this.totalPages = Math.ceil(publicRepoCount / this.perPage); 
     this.updatePageNumbers();
   }
 // changing the page number and calling the load repositories
@@ -90,5 +91,10 @@ export class RepoListComponent implements OnChanges {
       { length: Math.min(9, this.totalPages - startingPage + 1) },
       (_, i) => startingPage + i
     );
+  }
+
+  onPerPageChange(): void {
+    this.currentPage = 1; // Resetting to first page when perPage changes
+    this.loadRepositories(); // Reloading repositories with the new perPage value
   }
 }

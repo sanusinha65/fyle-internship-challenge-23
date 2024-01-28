@@ -1,5 +1,5 @@
 <div>
-  <app-user-input (submitNameEvent)="handleSubmission($event)"></app-user-input> 
+  <app-user-input (submitNameEvent)="handleSubmission($event)"></app-user-input>
   <app-user-details [userInput]="userInput" (publicRepoCount)="handlePublicRepoCount($event)"></app-user-details>
   <app-repo-list [userInput]="userInput" [publicRepoCount]="publicRepoCount"></app-repo-list>
 </div>
