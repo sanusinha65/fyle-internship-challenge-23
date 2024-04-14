@@ -35,6 +35,7 @@ export class UserDetailsComponent implements OnChanges {
         
         this.scrollIntoView();
       }, error => {
+        this.isLoading = false;
         this.error = 'Error fetching user details: ' + error.message;
       }, () => {
         this.isLoading = false;
