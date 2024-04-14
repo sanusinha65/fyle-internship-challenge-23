@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserDetailsComponent } from './user-details.component';
 import { ApiService } from '../services/api.service';
-import { of } from 'rxjs';
 
 describe('UserDetailsComponent', () => {
   let component: UserDetailsComponent;

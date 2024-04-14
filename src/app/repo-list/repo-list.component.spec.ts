@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RepoListComponent } from './repo-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ApiService } from '../services/api.service';
-import { of } from 'rxjs';
 
 describe('RepoListComponent', () => {
   let component: RepoListComponent;
