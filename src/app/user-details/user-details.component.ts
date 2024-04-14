@@ -1,7 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { catchError, finalize } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -17,7 +15,7 @@ export class UserDetailsComponent implements OnChanges {
   userData: any;
   repos: any;
   error: string | null = null;
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private elementRef: ElementRef) {}
 // fetching the user data from the user input
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['userInput'] && this.userInput) {
@@ -27,20 +25,26 @@ export class UserDetailsComponent implements OnChanges {
   }
 // for fetching the details 
   private fetchUserDetails(username: string): void {
-    this.userData = null; //clearing the previous details 
-    this.repos = null; // clearing the repos
-    this.error = null; //clearing the errors
+    this.userData = null;
+    this.repos = null;
+    this.error = null;
     this.apiService.getUser(username) 
-      .pipe(
-        catchError(error => {
-          this.error = 'Error fetching user details: ' + error.message;
-          return throwError(error);
-        }),
-        finalize(() => this.isLoading = false) 
-      )
       .subscribe(userData => {
-        this.userData = userData;  // getting the user data 
-        this.publicRepoCount.emit(userData.public_repos); // passing the total repo count to calculate the page num
+        this.userData = userData;
+        this.publicRepoCount.emit(userData.public_repos);
+        
+        this.scrollIntoView();
+      }, error => {
+        this.error = 'Error fetching user details: ' + error.message;
+      }, () => {
+        this.isLoading = false;
       });
+  } 
+
+  private scrollIntoView(): void {
+    const element = this.elementRef.nativeElement.querySelector('#gitUserDetailsView');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   } 
 }
