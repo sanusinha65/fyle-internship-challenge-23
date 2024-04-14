@@ -29,4 +29,13 @@ describe('RepoListComponent', () => {
     expect(component.currentPage).toEqual(initialPage - 1);
   });
 
+  it('should go to next page when nextPage() is called', () => {
+    component.currentPage = 1;
+    component.totalPages = 2; // Mock totalPages
+    const initialPage = component.currentPage
+    component.nextPage();
+    expect(component.currentPage).toEqual(initialPage + 1);
+  });
+  
+
 });
