@@ -4,7 +4,7 @@
       <div class="flex flex-wrap justify-between items-center">
         <div class="w-full md:w-1/4">
           <a href="/" class="flex items-center">
-            <span class="text-xl font-semibold dark:text-white">Github Profile Checker</span>
+            <span class="text-xl font-semibold dark:text-white">Github User Checker</span>
           </a>
         </div>
         <div class="w-full md:w-1/2 mt-4 md:mt-0">
@@ -31,11 +31,27 @@
 </header>
 
 <div class="bg-dark container mx-auto max-w-screen-xl text-center pt-10">
+  <div class="flex flex-row items-center" *ngIf="this.previousName!=''">
+      <span>Previous Search: &nbsp;</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="mt-2 mb-2" (click)="searchPreviousName()">
+        <div class="flex flex-col max-w-sm h-full shadow-2xl border border-indigo-500 rounded-3xl overflow-hidden shadow-lg hover:bg-gray-100">
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl text-indigo-900 mb-2">
+              <p class="hover:text-red-500 cursor-default" id="previousName">{{previousName}}</p>
+            </div>
+            <p class="text-gray-700 text-base text-gray-400">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="flex flex-col justify-center items-center">
     <img src="assets/git.png" class="card_hover" alt="Git" width="400" />
-    <h1 class="text-center text-2xl font-bold pt-5">What is GitHub Profile Checker?</h1>
+    <h1 class="text-center text-2xl font-bold pt-5">What is GitHub User Checker?</h1>
     <h3 class="text-center text-xl pt-5">
-      Welcome To The GitHub Profile Checker! We're here with the website through which you will be able to retrieve some cool and detailed info of the Git User. 
+      Welcome To The GitHub User Checker! We're here with the website through which you will be able to retrieve some cool and detailed info of the Git User. 
     </h3>
   </div>
 </div>
